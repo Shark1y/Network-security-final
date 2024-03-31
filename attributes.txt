@@ -1,0 +1,73 @@
+Packet Attributes:
+Layer: <class 'scapy.layers.l2.Ether'>
+- dst
+- src
+- type
+Layer: <class 'scapy.layers.inet6.IPv6'>
+- version
+- tc
+- fl
+- plen
+- nh
+- hlim
+- src
+- dst
+Layer: <class 'scapy.layers.inet.TCP'>
+- sport
+- dport
+- seq
+- ack
+- dataofs
+- reserved
+- flags
+- window
+- chksum
+- urgptr
+- options
+Layer: <class 'scapy.packet.Raw'>
+- load
+
+
+The attributes you can print from a packet captured using Scapy depend on the protocols present in the packet. Here are some common attributes you might want to print for different protocols:
+
+1. **IP Layer Attributes**:
+   - Source IP address (`packet["IP"].src`)
+   - Destination IP address (`packet["IP"].dst`)
+   - IP version (`packet["IP"].version`)
+   - Time to Live (TTL) (`packet["IP"].ttl`)
+   - Protocol (`packet["IP"].proto`)
+
+2. **TCP Layer Attributes**:
+   - Source port (`packet["TCP"].sport`)
+   - Destination port (`packet["TCP"].dport`)
+   - Sequence number (`packet["TCP"].seq`)
+   - Acknowledgment number (`packet["TCP"].ack`)
+   - TCP flags (`packet["TCP"].flags`)
+   - Window size (`packet["TCP"].window`)
+   - Checksum (`packet["TCP"].chksum`)
+
+3. **UDP Layer Attributes**:
+   - Source port (`packet["UDP"].sport`)
+   - Destination port (`packet["UDP"].dport`)
+   - Length (`packet["UDP"].len`)
+   - Checksum (`packet["UDP"].chksum`)
+
+4. **ICMP Layer Attributes**:
+   - Type (`packet["ICMP"].type`)
+   - Code (`packet["ICMP"].code`)
+   - Checksum (`packet["ICMP"].chksum`)
+
+5. **Ethernet Layer Attributes**:
+   - Source MAC address (`packet["Ethernet"].src`)
+   - Destination MAC address (`packet["Ethernet"].dst`)
+   - Ethernet type (`packet["Ethernet"].type`)
+
+6. **DNS Layer Attributes**:
+   - DNS query ID (`packet["DNS"].id`)
+   - DNS flags (`packet["DNS"].flags`)
+   - DNS query/response information (`packet["DNS"].qd` for queries and `packet["DNS"].an` for answers)
+
+7. **HTTP Layer Attributes**:
+   - HTTP method (`packet["HTTP"].Method`)
+   - HTTP status code (`packet["HTTP"].Status_Code`)
+   - HTTP headers (`packet["HTTP"].fields`)
