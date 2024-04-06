@@ -1,0 +1,246 @@
+###[ Ethernet ]### 
+  dst       = ff:ff:ff:ff:ff:ff
+  src       = f0:57:a6:a6:5e:37
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 72
+     id        = 33532
+     flags     = 
+     frag      = 0
+     ttl       = 128
+     proto     = udp
+     chksum    = 0x332b
+     src       = 192.168.1.46
+     dst       = 192.168.1.255
+     \options   \
+###[ UDP ]### 
+        sport     = 57621
+        dport     = 57621
+        len       = 52
+        chksum    = 0x6aac
+###[ Raw ]### 
+           load      = 'SpotUdp0~\\xab\\xee\\xa4X蒥\x00\x01\x00\x04H\\x95\\xc2\x03JL-&\\xe8\x7f%\\xdd.{\\xccF\\xf9.D\x16\x02\\x83\\xa1\\xe0'
+
+###[ Ethernet ]### 
+  dst       = 74:1b:b2:f1:d1:19
+  src       = 56:ed:05:8d:95:33
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 72
+     id        = 17057
+     flags     = 
+     frag      = 0
+     ttl       = 255
+     proto     = udp
+     chksum    = 0xf49f
+     src       = 192.168.1.94
+     dst       = 192.168.1.181
+     \options   \
+###[ UDP ]### 
+        sport     = mdns
+        dport     = mdns
+        len       = 52
+        chksum    = 0xb889
+###[ DNS ]### 
+           id        = 0
+           qr        = 0
+           opcode    = QUERY
+           aa        = 0
+           tc        = 0
+           rd        = 0
+           ra        = 0
+           z         = 0
+           ad        = 0
+           cd        = 0
+           rcode     = ok
+           qdcount   = 1
+           ancount   = 0
+           nscount   = 0
+           arcount   = 0
+           \qd        \
+            |###[ DNS Question Record ]### 
+            |  qname     = '_companion-link._tcp.local.'
+            |  qtype     = PTR
+            |  qclass    = 32769
+           an        = None
+           ns        = None
+           ar        = None
+
+###[ Ethernet ]### 
+  dst       = 56:ed:05:8d:95:33
+  src       = 74:1b:b2:f1:d1:19
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 64
+     id        = 0
+     flags     = DF
+     frag      = 0
+     ttl       = 64
+     proto     = tcp
+     chksum    = 0xb654
+     src       = 192.168.1.181
+     dst       = 192.168.1.94
+     \options   \
+###[ TCP ]### 
+        sport     = 49313
+        dport     = 57208
+        seq       = 2977261242
+        ack       = 1320662466
+        dataofs   = 11
+        reserved  = 0
+        flags     = SA
+        window    = 65535
+        chksum    = 0x868a
+        urgptr    = 0
+        options   = [('MSS', 1460), ('NOP', None), ('WScale', 6), ('NOP', None), ('NOP', None), ('Timestamp', (3335344986, 3528491712)), ('SAckOK', b''), ('EOL', None)]
+
+###[ Ethernet ]### 
+  dst       = 56:ed:05:8d:95:33
+  src       = 74:1b:b2:f1:d1:19
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 476
+     id        = 16184
+     flags     = 
+     frag      = 0
+     ttl       = 255
+     proto     = udp
+     chksum    = 0xf674
+     src       = 192.168.1.181
+     dst       = 192.168.1.94
+     \options   \
+###[ UDP ]### 
+        sport     = mdns
+        dport     = mdns
+        len       = 456
+        chksum    = 0xa803
+###[ DNS ]### 
+           id        = 0
+           qr        = 1
+           opcode    = QUERY
+           aa        = 1
+           tc        = 0
+           rd        = 0
+           ra        = 0
+           z         = 0
+           ad        = 0
+           cd        = 0
+           rcode     = ok
+           qdcount   = 0
+           ancount   = 1
+           nscount   = 0
+           arcount   = 8
+           qd        = None
+           \an        \
+            |###[ DNS Resource Record ]### 
+            |  rrname    = '_companion-link._tcp.local.'
+            |  type      = PTR
+            |  rclass    = IN
+            |  ttl       = 4500
+            |  rdlen     = None
+            |  rdata     = 'Shark1y’s Mac Pro._companion-link._tcp.local.'
+           ns        = None
+           \ar        \
+            |###[ DNS SRV Resource Record ]### 
+            |  rrname    = 'Shark1y’s Mac Pro._companion-link._tcp.local.'
+            |  type      = SRV
+            |  rclass    = 32769
+            |  ttl       = 120
+            |  rdlen     = None
+            |  priority  = 0
+            |  weight    = 0
+            |  port      = 49313
+            |  target    = 'Shark1ys-Mac-Pro.local.'
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1y’s Mac Pro._companion-link._tcp.local.'
+            |     type      = TXT
+            |     rclass    = 32769
+            |     ttl       = 4500
+            |     rdlen     = 127
+            |     rdata     = [b'rpMac=0', b'rpHN=dedb4ba49f6f', b'rpFl=0x20000', b'rpHA=ab32840ea200', b'rpVr=360.4', b'rpAD=9f052c6db4b3', b'rpHI=2634d1cbaeb2', b'rpBA=C9:E9:9A:BC:AD:19']
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1y’s Mac Pro._device-info._tcp.local.'
+            |     type      = TXT
+            |     rclass    = IN
+            |     ttl       = 4500
+            |     rdlen     = 27
+            |     rdata     = [b'model=MacPro6,1', b'osxvers=21']
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1ys-Mac-Pro.local.'
+            |     type      = AAAA
+            |     rclass    = 32769
+            |     ttl       = 120
+            |     rdlen     = 16
+            |     rdata     = fe80::81f:5151:bbcf:339c
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1ys-Mac-Pro.local.'
+            |     type      = AAAA
+            |     rclass    = 32769
+            |     ttl       = 120
+            |     rdlen     = 16
+            |     rdata     = fd00:582f:f75c:9228:884:8b42:a769:b5ac
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1ys-Mac-Pro.local.'
+            |     type      = AAAA
+            |     rclass    = 32769
+            |     ttl       = 120
+            |     rdlen     = 16
+            |     rdata     = 2600:6c47:a2f0:a50:7e:94e0:45f9:a31e
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1ys-Mac-Pro.local.'
+            |     type      = A
+            |     rclass    = 32769
+            |     ttl       = 120
+            |     rdlen     = 4
+            |     rdata     = 192.168.1.181
+            |###[ DNS Resource Record ]### 
+            |     rrname    = 'Shark1ys-Mac-Pro.local.'
+            |     type      = AAAA
+            |     rclass    = 32769
+            |     ttl       = 120
+            |     rdlen     = 16
+            |     rdata     = 2600:6c47:a2f0:a50::12c4
+
+###[ Ethernet ]### 
+  dst       = 74:1b:b2:f1:d1:19
+  src       = 56:ed:05:8d:95:33
+  type      = IPv4
+###[ IP ]### 
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 64
+     id        = 0
+     flags     = DF
+     frag      = 0
+     ttl       = 64
+     proto     = tcp
+     chksum    = 0xb654
+     src       = 192.168.1.94
+     dst       = 192.168.1.181
+     \options   \
+###[ TCP ]### 
+        sport     = 57223
+        dport     = 49313
+        seq       = 2579631991
+        ack       = 0
+        dataofs   = 11
+        reserved  = 0
+        flags     = S
+        window    = 65535
+        chksum    = 0x4eeb
+        urgptr    = 0
+        options   = [('MSS', 1460), ('NOP', None), ('WScale', 6), ('NOP', None), ('NOP', None), ('Timestamp', (2888330785, 0)), ('SAckOK', b''), ('EOL', None)]
+

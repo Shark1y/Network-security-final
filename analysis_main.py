@@ -1,7 +1,7 @@
 from scapy.all import *
+import time
+from io import BytesIO
 import os
- 
-
 
 class colors:
     NEONPINK = '\033[95m'
@@ -14,14 +14,27 @@ class colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
+    
+def process_user_input(input_str):
+    #sudo iptables -A INPUT -s 203.0.113.51 -j DROP
+    try:
+        action, direction, target_type, target_value = input_str.split()
+        with open("rules.txt", 'a') as file:  # Open in append mode
+            file.write(f"{action} {direction} {target_type} {target_value}\n")
+        print(f"Successfully added the rule to rules.txt.")
+    except ValueError:
+        print("Invalid input format. Please provide input in the format: "
+              "<DROP/ACCEPT> <FROM/TO> <IP/PORT (word)> <IP address/PORT number>")
 
 def snif_packets():
     packet_amount = input(colors.YELLOW + "How many packets do we sniff? " + colors.END) #how many do we need
     if (int(packet_amount) <= 0): #if input is invalid
         exit() #terminate
     packet_list = sniff(filter="ip", count=int(packet_amount))
-    print("\033[H\033[J", end="") #clear screen
-    return packet_list,packet_amount
+    print(colors.CYAN + "Done" + colors.END)
+    time.sleep(2)
+    print("\033[H\033[J", end="")
+    return packet_list,int(packet_amount)
 
 def live_capture():
     while True:
@@ -111,26 +124,65 @@ def load_data():
     
     return ports_dict, http_dict
 
+def read_filewall_rules():
+    try:
+        print("\033[H\033[J", end="")
+        with open("rules.txt", 'r') as file:
+            lines = file.readlines()
+            for index, line in enumerate(lines):
+                print(f"Rule {index + 1}: {line.strip()}")
+    except FileNotFoundError:
+        print(f"Rules were not found.")
 
-    
+    print(colors.CYAN + "Done" + colors.END)
+    time.sleep(2)
+    print("\033[H\033[J", end="")
+
+def packets_to_text(packet_list):
+    with open("packet_text_output.txt", 'w') as file:
+        for packet in packet_list:
+            a = packet.show(dump=True)
+            print(type(a))
+            print(a)
+            file.write(a)
+            file.write("\n")    
+
+    print(colors.CYAN + "Done" + colors.END)
+    time.sleep(2)
+    print("\033[H\033[J", end="")    
+
+def packets_to_pcap(packet_list):
+    for packet in packet_list:
+        wrpcap('filtered.pcap', packet, append=True)
+        print(colors.CYAN + "Done" + colors.END)
+        time.sleep(2)
+        print("\033[H\033[J", end="")
 
 def main():
     #Welcome part of the program
     print("\033[H\033[J", end="")
     print(colors.NEONPINK + "Artem Sharkota, CS4723 Spring 2024" + colors.END)
     print(colors.CYAN + "This is Final Project" + colors.END)
-    print(colors.UNDERLINE + "Type exit to exit (ha, get it?)\n" + colors.END)
 
     #Initial Capture
-    print(colors.NEONPINK + "You don't have packets to work with" + colors.END)
-    packet_list, analyzed_packs = snif_packets()
-    print("\033[H\033[J", end="")
+    # print(colors.NEONPINK + "You don't have packets to work with" + colors.END)
+    # packet_list, analyzed_packs = snif_packets()
+    # print("\033[H\033[J", end="")
+    packet_list = None
+    analyzed_packs = 0
 
     while True:
         # Perform some action
+        print(colors.UNDERLINE + "Type ""exit"" to exit\n" + colors.END)
         print(colors.NEONPINK + "[1] Sniff Packets" + colors.END)
         print(colors.NEONPINK + "[2] Analyse Packets" + colors.END)
         print(colors.NEONPINK + "[3] Live Capture" + colors.END)
+        print(colors.NEONPINK + "[4] Add an iptable rule" + colors.END)
+        print(colors.NEONPINK + "[5] List iptables rules" + colors.END)
+        if (analyzed_packs > 0):
+            print(colors.NEONPINK + "[6] Save packets to text" + colors.END)
+            print(colors.NEONPINK + "[7] Save packets to pcap" + colors.END)
+        
         action_choose = input(colors.CYAN + "Enter your action: " + colors.END)
         
         # if user wants to sniff n amount of packets and save them for later use
@@ -140,6 +192,11 @@ def main():
 
         # if user want to analyse already recorded packets
         if action_choose == "2":
+            if analyzed_packs == 0:
+                print(colors.NEONPINK + "You don't have packets to work with" + colors.END)
+                packet_list, analyzed_packs = snif_packets()
+                print("\033[H\033[J", end="")
+
             print(f"We have {analyzed_packs} packets, do you want to record new packets?")
             action_choose = input(colors.CYAN + "Enter your action: " + colors.END)
             if action_choose.lower() == "no":
@@ -162,12 +219,27 @@ def main():
                 print("\033[H\033[J", end="")
                 continue
 
+        if action_choose == "4":
+            # Example usage:
+            print(colors.RED + "Example rule: ""DROP TO PORT 443""" + colors.END)
+            newRule = input("Enter rule in format <DROP/ACCEPT> <FROM/TO> <IP/PORT> <IP number/PORT number>: ")
+            process_user_input(newRule)
+
+        if action_choose == "5":
+            read_filewall_rules()
+
         if action_choose.lower() == "clear":
             print("\033[H\033[J", end="") #clear screen
 
         if action_choose.lower() == "exit":            
             print("\033[H\033[J", end="") #clear screen
             exit() #terminate the program
+
+        if (analyzed_packs > 0 and action_choose == "6"):
+            packets_to_text(packet_list)
+
+        if (analyzed_packs > 0 and action_choose == "7"):
+            packets_to_pcap(packet_list)
 
 if __name__ == "__main__":
     main()
