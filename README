@@ -1,0 +1,55 @@
+This project was written by Artem Sharkota
+CS4723
+
+This project utilized a Python library called "Scapy"
+
+Purpose: Sometimes doing this with Python is easier, as it provides the ability to implement machine learning or any other projects that involve the data from the packet. It's much more convenient to have it already in the code, and not in some files on your PC.
+
+
+At the first start of the program, it would ask you what action would you like to take:
+
+[1] Sniff Packets 
+    This action would call another function, snif_packets()
+    snif_pacets() would ask the user to input the amount of packets he would like to sniff, and will save it inside the storage within the application. The function has user input validation, it checks that input is valid and sniffs if input is valid. It returns the amount of packets that we have sniffed and the array of packets itself.
+
+[2] Analyse Packets
+    If the user has previously used option one, the user can use this option to show the output of the packets. It will contain information about each packet such as:
+        IP Source
+        IP Destination
+        Port Source
+        Port Destination
+        Flags
+        HTTP Response
+        Packet Length
+        Packet Type
+        Mac Address of Destination Machine
+    In this function, we also have Port boundaries, and the program will automatically tell you what kind of service might utilize this port number. The same scheme works for HTTP responses. The application has more than a hundred HTTP responses that can be understood and used for identification.TCP Flags can also be recognized, and it will print all TCP flags that were used for certain packets.
+
+[3] Live Capture
+    This option is intended for use as a background tool. This option doesn't allow for the interruption and works until the terminal session is interrupted (closed). Cntr+C wouldn't work. It provides the same information as option 2 for each packet:
+        IP Source
+        IP Destination
+        Port Source
+        Port Destination
+        Flags
+        HTTP Response
+        Packet Length
+        Packet Type
+        Mac Address of Destination Machine
+
+[4] Add an iptable rule
+    This functionality is not implemented for the actual iptables files in Linux. There is a "fake" table, called "rules.txt". When the user chooses option 4, it will provide him format of the rule that he would need to use: 
+        "<DROP/ACCEPT> <FROM/TO> <IP/PORT (in string formati)> <IP address/PORT number>"
+    The function has user input validation. In case the user doesn't stick to the format, the application will let him know that and ask to rewrite the rule. 
+
+[5] List iptables rules
+    This option would list all the rules from the "rules.txt" file for the user to look through. 
+
+*Note about Options 4 and 5.
+    These options were not implemented due to the complexity of Linux IP Tables. A couple prototypes were made, but none of them were bug-free. Application has a function for user input transfer for legit iptables rules, however, it wasn't done yet and can be implemented in the future. 
+
+[6] Save packets to text
+    If the user has previously used option 1, it has packets saved in the memory. This option allows them to be cast to text and saved inside the file. The output of this option would have every single flag enabled and list all available information about the packet. 
+
+[7] Save packets to pcap
+    If the user has previously used option 1, it has packets saved in the memory. This option allows them to be cast to pcap format and saved inside the file.
